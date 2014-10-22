@@ -36,11 +36,12 @@ function makeKey() {
 
 
 
-var PAGE_URL   = 'http://hitsa.github.io/c3s-registration/'
-var API_URL    = 'https://dev.entu.ee/api2/'
-var API_FOLDER = 619
-var API_USER   = 621
-var API_KEY    = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
+var PAGE_URL       = 'http://hitsa.github.io/c3s-registration/'
+var API_URL        = 'https://dev.entu.ee/api2/'
+var API_FOLDER     = 619
+var API_DEFINITION = 'c3sregistration'
+var API_USER       = 621
+var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
 
 angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
@@ -67,11 +68,9 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
 // START
     .controller('startCtrl', ['$scope', '$http', function($scope, $http) {
-
-        $scope.key = makeKey()
-
         $scope.sendLink = function() {
             $scope.sending = true
+            $scope.key = makeKey()
             $http({
                     method : 'POST',
                     url    : API_URL + 'entity-' + API_FOLDER,
@@ -107,7 +106,6 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                     $scope.sent = true
                                 })
                                 .error(function(data) {
-                                    cl(data)
                                     $scope.sending = false
                                 })
                         })
@@ -119,32 +117,69 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                     $scope.sending = false
                 })
         }
-
     }])
 
 
 
 // APPLICATION
     .controller('applicationCtrl', ['$scope', '$http', '$routeParams', '$location', function($scope, $http, $routeParams, $location) {
+        $scope.application = {}
+
         $http({
                 method : 'GET',
                 url    : API_URL + 'entity-' + $routeParams.application_id,
                 params : getSignedData($routeParams.application_id, $routeParams.key, {})
             })
             .success(function(data) {
-                cl(data)
-                // $scope.request_count += 1
-                // try        { $scope.title = data.result.displayname }
-                // catch(err) { $scope.title = '' }
-                // try        { $scope.description = data.result.properties.pollheader.values[0].value }
-                // catch(err) { $scope.description = '' }
-                // try        { $scope.howto = data.result.properties.pollhowto.values[0].value }
-                // catch(err) { $scope.howto = '' }
+                for (key in data.result.properties) {
+                    if(data.result.properties[key].values) {
+                        $scope.application[key.replace('-', '_')] = {
+                            id: data.result.properties[key].values[0].id,
+                            old: data.result.properties[key].values[0].value,
+                            value: data.result.properties[key].values[0].value
+                        }
+                    }
+                }
             })
             .error(function(data) {
-                cl(data)
-                // $location.path('/')
+                $location.path('/')
             })
 
+        $scope.doSave = function(e) {
+            var field = angular.element(e.srcElement).attr('id')
+            var property = API_DEFINITION + '-' + field.replace('_', '-')
+
+            if(!$scope.application[field]) return
+            if(!$scope.application[field].old && $scope.application[field].value || $scope.application[field].value != $scope.application[field].old) {
+                $scope.sending = true
+
+                if($scope.application[field].id) property += '.' + $scope.application[field].id
+
+                var properties = {}
+                properties[property] = $scope.application[field].value
+
+                $http({
+                        method : 'PUT',
+                        url    : API_URL + 'entity-' + $routeParams.application_id,
+                        data   : getSignedData($routeParams.application_id, $routeParams.key, properties)
+                    })
+                    .success(function(data) {
+                        var property = API_DEFINITION + '-' + field.replace('_', '-')
+                        if(data.result.properties[property]) {
+                            $scope.application[field] = {
+                                id: data.result.properties[property][0].id,
+                                old: data.result.properties[property][0].value,
+                                value: data.result.properties[property][0].value
+                            }
+                        } else {
+                            $scope.application[field] = {}
+                        }
+                        $scope.sending = false
+                    })
+                    .error(function(data) {
+                        $scope.sending = false
+                    })
+            }
+        }
 
     }])
