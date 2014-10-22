@@ -13,8 +13,12 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
         // $locationProvider.html5Mode(true)
         $routeProvider
             .when('/', {
-                // templateUrl: 'start',
+                templateUrl: 'start',
                 controller: 'startCtrl'
+            })
+            .when('/:id', {
+                templateUrl: 'application',
+                controller: 'applicationCtrl'
             })
             .otherwise({
                 redirectTo: '/'
@@ -25,5 +29,12 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
 // START
     .controller('startCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+
+    }])
+
+
+
+// APPLICATION
+    .controller('applicationCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 
     }])

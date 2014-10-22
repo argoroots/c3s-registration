@@ -1,0 +1,104 @@
+script(type='text/ng-template' id='application')
+
+  // pre.row {{ application | json }}
+
+  form#application.row
+    .form-group.col-xs-12.col-sm-4.col-sm-offset-4
+      select.form-control(id='role', required, ng-model='application.role')
+        option(value='') Chose your role...
+        option(value='student') I am a student
+        option(value='researcher') I am a junior researcher
+
+
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+      label.control-label(for='forename') Forename
+      input.form-control(id='forename', type='text', ng-model='application.forename', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5
+      label.control-label(for='surname') Surname
+      input.form-control(id='surname', type='text', ng-model='application.surname', placeholder='')
+
+
+    .form-group.col-xs-12.col-sm-2.col-md-2.col-sm-offset-1
+      label.control-label(for='gender') Gender
+      select.form-control(id='gender', ng-model='application.gender')
+        option(value='')
+        option(value='male') Male
+        option(value='female') Female
+
+    .form-group.col-xs-12.col-sm-4
+      label.control-label(for='citizenship') Citizenship
+      input.form-control(id='citizenship', type='text', ng-model='application.citizenship', placeholder='')
+
+    .form-group.col-xs-12.col-sm-4
+      label.control-label(for='residency') Country of residency
+      input.form-control(id='residency', type='text', ng-model='application.residency', placeholder='')
+
+
+    .form-group.col-xs-12.col-sm-7.col-sm-offset-1(ng-if='application.role == "researcher"')
+      label.control-label(for='title') Job title
+      input.form-control(id='title', type='text', ng-model='application.title', placeholder='')
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 University
+
+
+    .form-group.col-xs-12.col-sm-6.col-sm-offset-1
+      label.control-label(for='university-name') Name
+      input.form-control(id='university-name', type='text', ng-model='application.university.name', placeholder='')
+
+    .form-group.col-xs-12.col-sm-4
+      label.control-label(for='university-country') Country
+      input.form-control(id='university-country', type='text', ng-model='application.university.country', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5.col-md-6.col-lg-7.col-sm-offset-1
+      label.control-label(for='university-curriculum') Curriculum/Program
+      input.form-control(id='university-curriculum', type='text', ng-model='application.university.curriculum', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role')
+      label.control-label(for='university-graduation', ng-if='application.role == "student"') Expected year of graduation
+      label.control-label(for='university-graduation', ng-if='application.role == "researcher"') Year of graduation
+      input.form-control(id='university-graduation', type='text', ng-model='application.university.graduation', placeholder='')
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role == "student"')
+      label.control-label(for='university-topic') Dissertation Topic
+      input.form-control(id='university-topic', type='text', ng-model='application.university.topic', placeholder='')
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role == "student"') Dissertation advisor
+    h2.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role == "researcher"') Mentor
+
+    .form-group.col-xs-12.col-sm-5.col-lg-4.col-sm-offset-1(ng-if='application.role')
+      label.control-label(for='advisor-name') Name
+      input.form-control(id='advisor-name', type='text', ng-model='application.advisor.name', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5.col-lg-3(ng-if='application.role')
+      label.control-label(for='advisor-title') Title
+      input.form-control(id='advisor-title', type='text', ng-model='application.advisor.title', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5.col-lg-3.col-sm-offset-1.col-lg-offset-0(ng-if='application.role')
+      label.control-label(for='advisor-email') E-mail
+      input.form-control(id='advisor-email', type='text', ng-model='application.advisor.email', placeholder='')
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Files
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+      label.control-label(for='motivation-letter') Applicant motivation letter (max 1 page)
+      input.form-control(id='motivation-letter', type='file', ang-model='application.motivation-letter', placeholder='')
+
+    .form-group.col-xs-12.col-sm-5(ng-if='application.role')
+      label.control-label(for='support-letter', ng-if='application.role == "student"') Dissertation advisor's support letter (max 1 page)
+      label.control-label(for='support-letter', ng-if='application.role == "researcher"') Mentor's support letter (max 1 page)
+      input.form-control(id='support-letter', type='file', ang-model='application.support-letter', placeholder='')
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Other
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1
+      label.control-label(for='achievements') Previous achievements (published papers, awards, talks, etc. )
+      textarea.form-control(id='achievements', rows=5, ng-model='application.achievements', placeholder='')
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1
+      label.control-label(for='comments') Comments
+      textarea.form-control(id='comments', rows=5, ng-model='application.comments', placeholder='')
+
+    button.col-xs-12.col-sm-4.col-sm-offset-4.btn.btn-lg.btn-success Save
