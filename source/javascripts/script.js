@@ -70,6 +70,8 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 // START
     .controller('startCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.sendLink = function() {
+            if(!$scope.email) return
+
             $scope.sending = true
             $scope.key = makeKey()
             $http({
