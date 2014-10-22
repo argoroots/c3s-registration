@@ -28,7 +28,11 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
 
 // START
-    .controller('startCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    .controller('startCtrl', ['$scope', '$http', function($scope, $http) {
+
+        $scope.sendLink = function() {
+            $scope.sending = true
+        }
 
     }])
 
@@ -36,5 +40,6 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
 // APPLICATION
     .controller('applicationCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+
 
     }])
