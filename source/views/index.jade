@@ -26,7 +26,6 @@ html(ng-app='s3cApp')
 
         // pre.row {{ application | json }}
 
-
         form#application.row
           .form-group.col-xs-12.col-sm-4.col-sm-offset-4
             select.form-control(id='role', ng-model='application.role')
@@ -67,6 +66,7 @@ html(ng-app='s3cApp')
 
           h2.col-xs-12.col-sm-10.col-sm-offset-1 University
 
+
           .form-group.col-xs-12.col-sm-6.col-sm-offset-1
             label.control-label(for='university-name') Name
             input.form-control(id='university-name', type='text', ng-model='application.university.name', placeholder='')
@@ -79,12 +79,9 @@ html(ng-app='s3cApp')
             label.control-label(for='university-curriculum') Curriculum/Program
             input.form-control(id='university-curriculum', type='text', ng-model='application.university.curriculum', placeholder='')
 
-          .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role == "student"')
-            label.control-label(for='university-graduation') Expected year of graduation
-            input.form-control(id='university-graduation', type='text', ng-model='application.university.graduation', placeholder='')
-
-          .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role == "researcher"')
-            label.control-label(for='university-graduation') Year of graduation
+          .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role')
+            label.control-label(for='university-graduation', ng-if='application.role == "student"') Expected year of graduation
+            label.control-label(for='university-graduation', ng-if='application.role == "researcher"') Year of graduation
             input.form-control(id='university-graduation', type='text', ng-model='application.university.graduation', placeholder='')
 
           .form-group.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role == "student"')
@@ -113,11 +110,9 @@ html(ng-app='s3cApp')
             label.control-label(for='motivation-letter') Applicant motivation letter (max 1 page)
             input.form-control(id='motivation-letter', type='file', ang-model='application.motivation-letter', placeholder='')
 
-          .form-group.col-xs-12.col-sm-5(ng-if='application.role == "student"')
-            label.control-label(for='support-letter') Dissertation advisor's support letter (max 1 page)
-            input.form-control(id='support-letter', type='file', ang-model='application.support-letter', placeholder='')
-          .form-group.col-xs-12.col-sm-5(ng-if='application.role == "researcher"')
-            label.control-label(for='support-letter') Mentor's support letter (max 1 page)
+          .form-group.col-xs-12.col-sm-5(ng-if='application.role')
+            label.control-label(for='support-letter', ng-if='application.role == "student"') Dissertation advisor's support letter (max 1 page)
+            label.control-label(for='support-letter', ng-if='application.role == "researcher"') Mentor's support letter (max 1 page)
             input.form-control(id='support-letter', type='file', ang-model='application.support-letter', placeholder='')
 
 
