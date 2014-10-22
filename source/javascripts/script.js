@@ -2,7 +2,7 @@ function cl(d) {
     console.log(d)
 }
 
-var API_URL  = PAGE_URL + 'https://hitsa.entu.ee/api/'
+var API_URL  = 'https://hitsa.entu.ee/api/'
 
 angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
@@ -13,7 +13,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
         // $locationProvider.html5Mode(true)
         $routeProvider
             .when('/', {
-                templateUrl: 'start',
+                // templateUrl: 'start',
                 controller: 'startCtrl'
             })
             .otherwise({
