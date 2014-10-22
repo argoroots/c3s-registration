@@ -1,0 +1,112 @@
+doctype html
+html(ng-controller='mainCtrl')
+  head
+
+    title Cyber Security Summer School 2015 application
+
+    base(href='/')
+
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, minimal-ui')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300,600')
+
+
+    style @@include('stylesheet.css')
+
+    script @@include('javascript.js')
+
+  body
+    #wrapper
+      #content.container
+        .row
+          h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center Cyber Security Summer School 2015 application
+
+          //- pre {{ user | json }}
+
+        form#application.row
+          .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+            label.control-label(for='name') Forename
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-5
+            label.control-label(for='name') Surname
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+
+          .form-group.col-xs-12.col-sm-2.col-md-2.col-sm-offset-1
+            label.control-label(for='name') Gender
+            select.form-control(id='smartpost', ng-model='order.info.smartpost')
+              option(value='')
+              option(value='male') Male
+              option(value='female') Female
+
+          .form-group.col-xs-12.col-sm-4
+            label.control-label(for='name') Citizenship
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-4
+            label.control-label(for='name') Country of residency
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+
+          .form-group.col-xs-12.col-sm-7.col-sm-offset-1
+            label.control-label(for='name') Job title
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+
+          h2.col-xs-12.col-sm-10.col-sm-offset-1 University
+
+          .form-group.col-xs-12.col-sm-6.col-sm-offset-1
+            label.control-label(for='name') Name
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-4
+            label.control-label(for='name') Country
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+          .form-group.col-xs-12.col-sm-5.col-md-6.col-lg-7.col-sm-offset-1
+            label.control-label(for='name') Curriculum/Program
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+          .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3
+            label.control-label(for='name') (Expected) year of graduation
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+          .form-group.col-xs-12.col-sm-10.col-sm-offset-1
+            label.control-label(for='name') Dissertation Topic
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+
+          h2.col-xs-12.col-sm-10.col-sm-offset-1 Advisor or Mentor
+          .form-group.col-xs-12.col-sm-5.col-lg-4.col-sm-offset-1
+            label.control-label(for='name') Name
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-5.col-lg-3
+            label.control-label(for='name') Title
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-5.col-lg-3.col-sm-offset-1.col-lg-offset-0
+            label.control-label(for='name') E-mail
+            input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
+
+
+          h2.col-xs-12.col-sm-10.col-sm-offset-1 Files
+          .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+            label.control-label(for='name') Applicant motivation letter (max 1 page)
+            input.form-control(id='name', type='file', ng-model='order.info.name', placeholder='')
+          .form-group.col-xs-12.col-sm-5
+            label.control-label(for='name') Advisor's or mentor's support letter (max 1 page)
+            input.form-control(id='name', type='file', ng-model='order.info.name', placeholder='')
+
+
+          h2.col-xs-12.col-sm-10.col-sm-offset-1 Other
+          .form-group.col-xs-12.col-sm-10.col-sm-offset-1
+            label.control-label(for='name') Previous achievements (published papers, awards, talks, etc. )
+            textarea.form-control(id='name', rows=5, ng-model='order.info.name', placeholder='')
+
+          .form-group.col-xs-12.col-sm-10.col-sm-offset-1
+            label.control-label(for='name') Comments
+            textarea.form-control(id='name', rows=5, ng-model='order.info.name', placeholder='')
+
+          button.col-xs-12.col-sm-4.col-sm-offset-4.btn.btn-lg.btn-success Save
