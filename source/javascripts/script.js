@@ -149,8 +149,9 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 $location.path('/')
             })
 
-        $scope.doSave = function(e) {
-            var field = angular.element(e.srcElement).attr('id')
+        $scope.doSave = function(event) {
+            var target = event.target || event.srcElement
+            var field = angular.element(target).attr('id')
             var property = API_DEFINITION + '-' + field.replace('_', '-')
 
             if(!$scope.application[field]) return
