@@ -27,6 +27,14 @@ html(ng-controller='mainCtrl')
           //- pre {{ user | json }}
 
         form#application.row
+          .form-group.col-xs-12.col-sm-4.col-sm-offset-4
+            label.control-label(for='name')
+            select.form-control(id='smartpost', ng-model='order.info.smartpost')
+              option(value='') Chose your role...
+              option(value='student') I am a student
+              option(value='junior-researcher') I am a junior researcher
+
+
           .form-group.col-xs-12.col-sm-5.col-sm-offset-1
             label.control-label(for='name') Forename
             input.form-control(id='name', type='text', ng-model='order.info.name', placeholder='')
