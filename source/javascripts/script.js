@@ -96,30 +96,29 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                             var url = PAGE_URL + '#/' + $scope.id + '/' + $scope.key
                             $http({
                                     method : 'POST',
-                                    url    : API_URL + 'email',
-                                    data   : getSignedData(API_USER, API_KEY, {
-                                        'to': $scope.email,
-                                        'subject': '2015 Cyber Security Summer School',
-                                        'message': 'Here is the link to your personal application form of 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
-                                        'campaign': API_CAMPAIGN
-                                    })
-                                })
-                                .success(function(data) {
-                                    $scope.sending = false
-                                    $scope.sent = true
-                                })
-                                .error(function(data) {
-                                    $scope.sending = false
-                                })
-                            $http({
-                                    method : 'POST',
                                     url    : API_URL + 'entity-' + $scope.id + '/rights',
                                     data   : getSignedData(API_USER, API_KEY, {
                                         'entity': API_USER
                                     })
                                 })
                                 .success(function(data) {
-                                    $scope.sending = false
+                                    $http({
+                                            method : 'POST',
+                                            url    : API_URL + 'email',
+                                            data   : getSignedData(API_USER, API_KEY, {
+                                                'to': $scope.email,
+                                                'subject': '2015 Cyber Security Summer School',
+                                                'message': 'Here is the link to your personal application form of 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
+                                                'campaign': API_CAMPAIGN
+                                            })
+                                        })
+                                        .success(function(data) {
+                                            $scope.sending = false
+                                            $scope.sent = true
+                                        })
+                                        .error(function(data) {
+                                            $scope.sending = false
+                                        })
                                 })
                                 .error(function(data) {
                                     $scope.sending = false
