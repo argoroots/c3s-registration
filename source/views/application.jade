@@ -35,11 +35,6 @@ script(type='text/ng-template', id='application')
       input.form-control(id='residency', type='text', ng-model='application.residency.value', ng-blur='doSave($event)')
 
 
-    .form-group.col-xs-12.col-sm-7.col-sm-offset-1(ng-if='application.role.value == "researcher"')
-      label.control-label(for='job_title') Job title
-      input.form-control(id='job_title', type='text', ng-model='application.job_title.value', ng-blur='doSave($event)')
-
-
     h2.col-xs-12.col-sm-10.col-sm-offset-1 University
 
 
@@ -51,13 +46,17 @@ script(type='text/ng-template', id='application')
       label.control-label(for='university_country') Country
       input.form-control(id='university_country', type='text', ng-model='application.university_country.value', ng-blur='doSave($event)')
 
-    .form-group.col-xs-12.col-sm-5.col-md-6.col-lg-7.col-sm-offset-1
+    .form-group.col-xs-12.col-sm-7.col-sm-offset-1(ng-if='application.role.value == "researcher"')
+      label.control-label(for='job_title') Job title
+      input.form-control(id='job_title', type='text', ng-model='application.job_title.value', ng-blur='doSave($event)')
+
+
+    .form-group.col-xs-12.col-sm-5.col-md-6.col-lg-7.col-sm-offset-1(ng-if='application.role.value == "student"')
       label.control-label(for='university_curriculum') Curriculum/Program
       input.form-control(id='university_curriculum', type='text', ng-model='application.university_curriculum.value', ng-blur='doSave($event)')
 
-    .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role.value')
-      label.control-label(for='university_graduation', ng-if='application.role.value == "student"') Expected year of graduation
-      label.control-label(for='university_graduation', ng-if='application.role.value == "researcher"') Year of graduation
+    .form-group.col-xs-12.col-sm-5.col-md-4.col-lg-3(ng-if='application.role.value == "student"')
+      label.control-label(for='university_graduation') Year of graduation
       input.form-control(id='university_graduation', type='text', ng-model='application.university_graduation.value', ng-blur='doSave($event)')
 
     .form-group.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role.value == "student"')
