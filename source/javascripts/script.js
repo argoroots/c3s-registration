@@ -36,7 +36,7 @@ function makeKey() {
 
 
 
-var PAGE_URL       = 'http://hitsa.github.io/c3s-registration/'
+var PAGE_URL       = 'http://c3sregistration.studyitin.ee/'
 var API_URL        = 'https://dev.entu.ee/api2/'
 var API_FOLDER     = 619
 var API_DEFINITION = 'c3sregistration'
