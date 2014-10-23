@@ -2,6 +2,16 @@ script(type='text/ng-template', id='application')
 
   //- pre.row {{ application | json }}
 
+  .row
+    p.col-xs-12.col-sm-10.col-sm-offset-1 Please complete all fields and upload the required documents by 15 March 2015. If you have any questions, please e-mail
+      a(href='mailto:info@studyitin.ee')  info@studyitin.ee
+      | .
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1 The admission into the Summer School will be decided by the admissions committee and you will be notified via e-mail by 30 March 2015.
+
+
+    .spacer.col-xs-12
+
   form#application.row
     .form-group.col-xs-12.col-sm-4.col-sm-offset-4
       select.form-control(id='role', required, ng-model='application.role.value', ng-blur='doSave($event)')
@@ -9,6 +19,7 @@ script(type='text/ng-template', id='application')
         option(value='student') I am a student
         option(value='researcher') I am a junior researcher
 
+    .spacer.col-xs-12
 
     .form-group.col-xs-12.col-sm-5.col-sm-offset-1
       label.control-label(for='forename') Forename

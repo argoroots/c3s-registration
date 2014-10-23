@@ -100,7 +100,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                     data   : getSignedData(API_USER, API_KEY, {
                                         'to': $scope.email,
                                         'subject': '2015 Cyber Security Summer School',
-                                        'message': 'Here is the link to your personal application form of 2015 Cyber Security Summer School:<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
+                                        'message': 'Here is the link to your personal application form of 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
                                         'campaign': API_CAMPAIGN
                                     })
                                 })
