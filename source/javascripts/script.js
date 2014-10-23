@@ -66,7 +66,6 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
     }])
 
 
-
 // START
     .controller('startCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.sendLink = function() {
@@ -149,8 +148,8 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 $location.path('/')
             })
 
-        $scope.doSave = function(event) {
-            var target = event.target || event.srcElement
+        $scope.doSave = function(e) {
+            var target = e.target || e.srcElement
             var field = angular.element(target).attr('id')
             var property = API_DEFINITION + '-' + field.replace('_', '-')
 
@@ -185,6 +184,47 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         $scope.sending = false
                     })
             }
+        }
+
+        $scope.doFileUpload = function(e) {
+            $scope.sending = true
+
+            var field = e.id
+            var file = e.files[0]
+            var property = API_DEFINITION + '-' + field.replace('_', '-')
+
+            var r = new FileReader()
+            r.onloadend = function(f){
+                var content = f.target.result
+                cl(content.length)
+                $http({
+                        method : 'POST',
+                        url    : API_URL + 'file',
+                        params : getSignedData($routeParams.application_id, $routeParams.key, {
+                            entity: $routeParams.application_id,
+                            property: property,
+                            filename: file.name
+                        }),
+                        data   : content
+                    })
+                    .success(function(data) {
+                        var property = API_DEFINITION + '-' + field.replace('_', '-')
+                        if(data.result.properties[property]) {
+                            $scope.application[field] = {
+                                id: data.result.properties[property][0].id,
+                                old: data.result.properties[property][0].value,
+                                value: data.result.properties[property][0].value
+                            }
+                        } else {
+                            $scope.application[field] = {}
+                        }
+                        $scope.sending = false
+                    })
+                    .error(function(data) {
+                        $scope.sending = false
+                    })
+            }
+            r.readAsArrayBuffer(file)
         }
 
     }])
