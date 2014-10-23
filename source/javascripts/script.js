@@ -111,6 +111,19 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                 .error(function(data) {
                                     $scope.sending = false
                                 })
+                            $http({
+                                    method : 'POST',
+                                    url    : API_URL + 'entity-' + $scope.id + '/rights',
+                                    data   : getSignedData(API_USER, API_KEY, {
+                                        'entity': API_USER
+                                    })
+                                })
+                                .success(function(data) {
+                                    $scope.sending = false
+                                })
+                                .error(function(data) {
+                                    $scope.sending = false
+                                })
                         })
                         .error(function(data) {
                             $scope.sending = false
@@ -125,7 +138,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
 
 // APPLICATION
-    .controller('applicationCtrl', ['$scope', '$http', '$routeParams', '$location', function($scope, $http, $routeParams, $location) {
+    .controller('applicationCtrl', ['$scope', '$http', '$routeParams', '$location', '$timeout', function($scope, $http, $routeParams, $location, $timeout) {
         $scope.application = {}
 
         $http({
@@ -184,6 +197,13 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         $scope.sending = false
                     })
             }
+        }
+
+        $scope.fakeSave = function() {
+            $scope.sending = true
+            $timeout(function() {
+                $scope.sending = false
+            }, 2000)
         }
 
         $scope.doFileUpload = function(e) {
