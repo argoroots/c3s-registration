@@ -6,17 +6,17 @@ script(type='text/ng-template', id='application')
     h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center Application
 
   .row
-    p.col-xs-12.col-sm-10.col-sm-offset-1 Please complete all fields and upload the required documents by 15 March 2015. If you have any questions, please e-mail
+    p.col-xs-12.col-sm-8.col-sm-offset-2.text-center Please complete all fields and upload the required documents by 15 March 2015. If you have any questions, please e-mail
       a(href='mailto:info@studyitin.ee')  info@studyitin.ee
       | .
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1 The admission into the Summer School will be decided by the admissions committee and you will be notified via e-mail by 30 March 2015.
+    p.col-xs-12.col-sm-8.col-sm-offset-2.text-center The admission into the Summer School will be decided by the admissions committee and you will be notified via e-mail by 30 March 2015.
 
     .spacer.col-xs-12
 
   form#application.row
     .form-group.col-xs-12.col-sm-4.col-sm-offset-4
-      select.form-control(id='role', required, ng-model='application.role.value', ng-blur='doSave($event)')
+      select.form-control(id='role', ng-model='application.role.value', ng-blur='doSave($event)')
         option(value='') Chose your role...
         option(value='student') I am a student
         option(value='researcher') I am a junior researcher

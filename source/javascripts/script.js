@@ -246,4 +246,20 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             r.readAsArrayBuffer(file)
         }
 
+        $scope.doCancel = function() {
+
+            if(!window.confirm('Are You sure, You want to cancel Your application? If You change Your mind later, You must create it again.')) return
+
+            $http({
+                    method : 'DELETE',
+                    url    : API_URL + 'entity-' + $routeParams.application_id,
+                    params : getSignedData($routeParams.application_id, $routeParams.key, {})
+                })
+                .success(function(data) {
+                    $location.path('/')
+                })
+                .error(function(data) {
+
+                })
+        }
     }])
