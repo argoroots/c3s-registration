@@ -108,7 +108,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                             data   : getSignedData(API_USER, API_KEY, {
                                                 'to': $scope.email,
                                                 'subject': '2015 Cyber Security Summer School',
-                                                'message': 'Here is the link to your personal application form of 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
+                                                'message': 'Here is the link to your personal application form of the 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
                                                 'campaign': API_CAMPAIGN
                                             })
                                         })
@@ -248,7 +248,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
         $scope.doCancel = function() {
 
-            if(!window.confirm('Are You sure, You want to cancel Your application? If You change Your mind later, You must create it again.')) return
+            if(!window.confirm('Are you sure, you want to cancel your application? If you change your mind later, you must create it again.')) return
 
             $http({
                     method : 'DELETE',
