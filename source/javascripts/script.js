@@ -248,7 +248,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
         $scope.doCancel = function() {
 
-            if(!window.confirm('Are you sure, you want to cancel your application? If you change your mind later, you must create it again.')) return
+            if(!window.confirm('Are you sure, you want to cancel your application? If you change your mind later, you must start over again.')) return
 
             $http({
                     method : 'DELETE',
