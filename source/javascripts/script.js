@@ -42,7 +42,8 @@ var API_FOLDER     = 619
 var API_DEFINITION = 'c3sregistration'
 var API_USER       = 621
 var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
-var API_CAMPAIGN   = 'dde2r'
+// var API_CAMPAIGN   = 'dde2r'
+var API_CAMPAIGN   = null
 
 angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
