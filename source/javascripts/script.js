@@ -42,8 +42,6 @@ var API_FOLDER     = 619
 var API_DEFINITION = 'c3sregistration'
 var API_USER       = 621
 var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
-// var API_CAMPAIGN   = 'dde2r'
-var API_CAMPAIGN   = null
 
 angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
@@ -109,8 +107,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                             data   : getSignedData(API_USER, API_KEY, {
                                                 'to': $scope.email,
                                                 'subject': '2015 Cyber Security Summer School',
-                                                'message': 'Here is the link to your personal application form of the 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!',
-                                                'campaign': API_CAMPAIGN
+                                                'message': 'Here is the link to your personal application form of the 2015 Cyber Security Summer School. Please keep it safe, you will need it until the end of Summer School.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nDo not share it!'
                                             })
                                         })
                                         .success(function(data) {
