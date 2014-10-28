@@ -5,7 +5,7 @@ script(type='text/ng-template', id='start')
     h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center(ng-show='sent') Thank You!
 
   .row
-    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='!sent') To start filling application form, please enter your e-mail address below. Your application link will be sent to this e-mail.
+    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='!sent') To start filling in application form, please enter your e-mail address below. Your application link will be sent to this e-mail.
     p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='sent') Link to Your application form was sent to {{ email }}.
 
   form#application.row(ng-show='!sent')
