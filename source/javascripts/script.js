@@ -38,8 +38,6 @@ function makeKey() {
 
 var PAGE_URL       = 'http://c3sregistration.studyitin.ee/'
 var API_URL        = 'https://hitsa.entu.ee/api2/'
-var API_FOLDER     = 619
-var API_DEFINITION = 'c3sregistration'
 var API_USER       = 621
 var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
 
@@ -55,7 +53,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 templateUrl: 'start',
                 controller: 'startCtrl'
             })
-            .when('/:application_id/:key', {
+            .when('/:application_id/:application_key', {
                 templateUrl: 'application',
                 controller: 'applicationCtrl'
             })
@@ -74,7 +72,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             $scope.key = makeKey()
             $http({
                     method : 'POST',
-                    url    : API_URL + 'entity-' + API_FOLDER,
+                    url    : API_URL + 'entity-619',
                     data   : getSignedData(API_USER, API_KEY, {
                         'definition': 'c3sregistration',
                         'c3sregistration-email': $scope.email,
@@ -141,7 +139,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
         $http({
                 method : 'GET',
                 url    : API_URL + 'entity-' + $routeParams.application_id,
-                params : getSignedData($routeParams.application_id, $routeParams.key, {})
+                params : getSignedData($routeParams.application_id, $routeParams.application_key, {})
             })
             .success(function(data) {
                 for (key in data.result.properties) {
@@ -161,7 +159,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
         $scope.doSave = function(e) {
             var target = e.target || e.srcElement
             var field = angular.element(target).attr('id')
-            var property = API_DEFINITION + '-' + field.replace('_', '-')
+            var property = 'c3sregistration-' + field.replace('_', '-')
 
             if(!$scope.application[field]) return
             if(!$scope.application[field].old && $scope.application[field].value || $scope.application[field].value != $scope.application[field].old) {
@@ -175,10 +173,10 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 $http({
                         method : 'PUT',
                         url    : API_URL + 'entity-' + $routeParams.application_id,
-                        data   : getSignedData($routeParams.application_id, $routeParams.key, properties)
+                        data   : getSignedData($routeParams.application_id, $routeParams.application_key, properties)
                     })
                     .success(function(data) {
-                        var property = API_DEFINITION + '-' + field.replace('_', '-')
+                        var property = 'c3sregistration-' + field.replace('_', '-')
                         if(data.result.properties[property]) {
                             $scope.application[field] = {
                                 id: data.result.properties[property][0].id,
@@ -208,7 +206,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
 
             var field = e.id
             var file = e.files[0]
-            var property = API_DEFINITION + '-' + field.replace('_', '-')
+            var property = 'c3sregistration-' + field.replace('_', '-')
 
             var r = new FileReader()
             r.onloadend = function(f){
@@ -217,7 +215,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 $http({
                         method : 'POST',
                         url    : API_URL + 'file',
-                        params : getSignedData($routeParams.application_id, $routeParams.key, {
+                        params : getSignedData($routeParams.application_id, $routeParams.application_key, {
                             entity: $routeParams.application_id,
                             property: property,
                             filename: file.name
@@ -225,7 +223,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         data   : content
                     })
                     .success(function(data) {
-                        var property = API_DEFINITION + '-' + field.replace('_', '-')
+                        var property = 'c3sregistration-' + field.replace('_', '-')
                         if(data.result.properties[property]) {
                             $scope.application[field] = {
                                 id: data.result.properties[property][0].id,
@@ -251,7 +249,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             $http({
                     method : 'DELETE',
                     url    : API_URL + 'entity-' + $routeParams.application_id,
-                    params : getSignedData($routeParams.application_id, $routeParams.key, {})
+                    params : getSignedData($routeParams.application_id, $routeParams.application_key, {})
                 })
                 .success(function(data) {
                     $location.path('/')
