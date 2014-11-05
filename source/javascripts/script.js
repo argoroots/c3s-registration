@@ -228,7 +228,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             xhr.upload.addEventListener('progress', function (ev) {
                 if(!ev.lengthComputable) return
                 $scope.application[field] = {
-                    progress: Math.abs(parseInt(ev.loaded * 100 / ev.total) - 1)
+                    progress: (ev.loaded * 100 / ev.total - 0.1).toFixed(1)
                 }
                 $scope.$apply()
             }, false)
