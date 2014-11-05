@@ -215,9 +215,9 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             var form  = new FormData()
 
             var form_data = getSignedData($routeParams.application_id, $routeParams.application_key, {
-                entity: $routeParams.application_id,
-                property: 'c3sregistration-' + field.replace('_', '-'),
-                filename: file.name
+                entity   : $routeParams.application_id,
+                property : 'c3sregistration-' + field.replace('_', '-'),
+                filename : file.name
             })
 
             for(var i in form_data) {
@@ -226,16 +226,16 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             form.append('file', file)
 
             xhr.upload.addEventListener('progress', function (ev) {
-                if(ev.lengthComputable) {
-                    $scope.application[field] = {
-                        progress: (parseInt(ev.loaded * 100 / ev.total) - 1)
-                    }
-                    $scope.$apply()
+                if(!ev.lengthComputable) return
+                $scope.application[field] = {
+                    progress: Math.abs(parseInt(ev.loaded * 100 / ev.total) - 1)
                 }
+                $scope.$apply()
             }, false)
 
             xhr.onreadystatechange = function(ev) {
-                if(xhr.readyState == 4 && xhr.status == 200) {
+                if(xhr.readyState != 4) return
+                if(xhr.status == 200) {
                     var property = 'c3sregistration-' + field.replace('_', '-')
                     var data = JSON.parse(xhr.response)
 
@@ -251,15 +251,15 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         $scope.$apply()
                     }
                     $scope.sending = false
-                }
-                if(xhr.readyState == 4 && xhr.status != 200) {
+                } else {
                     cl(xhr)
+                    $scope.application[field] = {}
+                    $scope.$apply()
                 }
             }
 
             xhr.open('POST', API_URL + 'file', true)
             xhr.send(form)
-
         }
 
         $scope.doFileDelete = function(field, id) {

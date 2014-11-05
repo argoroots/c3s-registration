@@ -97,7 +97,7 @@ script(type='text/ng-template', id='application')
     .form-group.col-xs-12.col-sm-5.col-sm-offset-1
       label.control-label(for='motivation_letter') Applicant's motivation letter (max 1 page)
       input.form-control(id='motivation_letter', type='file', onchange='angular.element(this).scope().doFileUpload(this)', ng-show='!application.motivation_letter')
-      .col-xs-12(ng-if='application.motivation_letter.progress') {{ application.support_letter.progress }}% uploaded. Please wait...
+      .col-xs-12(ng-if='application.motivation_letter.progress') {{ application.motivation_letter.progress }}% uploaded. Please wait...
       a.col-xs-12.file(href='', ng-show='application.motivation_letter', ng-click='doFileDelete("motivation_letter", application.motivation_letter.id)', title='Delete file...') {{ application.motivation_letter.value }}
 
     .form-group.col-xs-12.col-sm-5(ng-if='application.role.value')
