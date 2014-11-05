@@ -97,13 +97,15 @@ script(type='text/ng-template', id='application')
     .form-group.col-xs-12.col-sm-5.col-sm-offset-1
       label.control-label(for='motivation_letter') Applicant's motivation letter (max 1 page)
       input.form-control(id='motivation_letter', type='file', onchange='angular.element(this).scope().doFileUpload(this)', ng-show='!application.motivation_letter')
-      a.file(href='', ng-show='application.motivation_letter') {{ application.motivation_letter.value }}
+      .col-xs-12(ng-if='application.motivation_letter.progress') {{ application.support_letter.progress }}% uploaded. Please wait...
+      a.col-xs-12.file(href='', ng-show='application.motivation_letter', ng-click='doFileDelete("motivation_letter", application.motivation_letter.id)', title='Delete file...') {{ application.motivation_letter.value }}
 
     .form-group.col-xs-12.col-sm-5(ng-if='application.role.value')
       label.control-label(for='support_letter', ng-if='application.role.value == "student"') Dissertation advisor's support letter (max 1 page)
       label.control-label(for='support_letter', ng-if='application.role.value == "researcher"') Mentor's support letter (max 1 page)
       input.form-control(id='support_letter', type='file', onchange='angular.element(this).scope().doFileUpload(this)', ng-show='!application.support_letter')
-      a.file(href='', ng-show='application.support_letter') {{ application.support_letter.value }}
+      .col-xs-12(ng-if='application.support_letter.progress') {{ application.support_letter.progress }}% uploaded. Please wait...
+      a.col-xs-12.file(href='', ng-show='application.support_letter', ng-click='doFileDelete("support_letter", application.support_letter.id)', title='Delete file...') {{ application.support_letter.value }}
 
 
     h2.col-xs-12.col-sm-10.col-sm-offset-1 Other

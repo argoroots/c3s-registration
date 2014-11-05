@@ -113,18 +113,22 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                                             $scope.sent = true
                                         })
                                         .error(function(data) {
+                                            cl(data.error)
                                             $scope.sending = false
                                         })
                                 })
                                 .error(function(data) {
+                                    cl(data.error)
                                     $scope.sending = false
                                 })
                         })
                         .error(function(data) {
+                            cl(data.error)
                             $scope.sending = false
                         })
                 })
                 .error(function(data) {
+                    cl(data.error)
                     $scope.sending = false
                 })
         }
@@ -189,6 +193,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         $scope.sending = false
                     })
                     .error(function(data) {
+                        cl(data.error)
                         $scope.sending = false
                     })
             }
@@ -205,41 +210,77 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             $scope.sending = true
 
             var field = e.id
-            var file = e.files[0]
-            var property = 'c3sregistration-' + field.replace('_', '-')
+            var file  = e.files[0]
+            var xhr   = new XMLHttpRequest()
+            var form  = new FormData()
 
-            var r = new FileReader()
-            r.onloadend = function(f){
-                var content = f.target.result
-                cl(content.length)
-                $http({
-                        method : 'POST',
-                        url    : API_URL + 'file',
-                        params : getSignedData($routeParams.application_id, $routeParams.application_key, {
-                            entity: $routeParams.application_id,
-                            property: property,
-                            filename: file.name
-                        }),
-                        data   : content
-                    })
-                    .success(function(data) {
-                        var property = 'c3sregistration-' + field.replace('_', '-')
-                        if(data.result.properties[property]) {
-                            $scope.application[field] = {
-                                id: data.result.properties[property][0].id,
-                                old: data.result.properties[property][0].value,
-                                value: data.result.properties[property][0].value
-                            }
-                        } else {
-                            $scope.application[field] = {}
-                        }
-                        $scope.sending = false
-                    })
-                    .error(function(data) {
-                        $scope.sending = false
-                    })
+            var form_data = getSignedData($routeParams.application_id, $routeParams.application_key, {
+                entity: $routeParams.application_id,
+                property: 'c3sregistration-' + field.replace('_', '-'),
+                filename: file.name
+            })
+
+            for(var i in form_data) {
+                form.append(i, form_data[i])
             }
-            r.readAsArrayBuffer(file)
+            form.append('file', file)
+
+            xhr.upload.addEventListener('progress', function (ev) {
+                if(ev.lengthComputable) {
+                    $scope.application[field] = {
+                        progress: (parseInt(ev.loaded * 100 / ev.total) - 1)
+                    }
+                    $scope.$apply()
+                }
+            }, false)
+
+            xhr.onreadystatechange = function(ev) {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    var property = 'c3sregistration-' + field.replace('_', '-')
+                    var data = JSON.parse(xhr.response)
+
+                    if(data.result.properties[property]) {
+                        $scope.application[field] = {
+                            id: data.result.properties[property][0].id,
+                            old: data.result.properties[property][0].value,
+                            value: data.result.properties[property][0].value
+                        }
+                        $scope.$apply()
+                    } else {
+                        $scope.application[field] = {}
+                        $scope.$apply()
+                    }
+                    $scope.sending = false
+                }
+                if(xhr.readyState == 4 && xhr.status != 200) {
+                    cl(xhr)
+                }
+            }
+
+            xhr.open('POST', API_URL + 'file', true)
+            xhr.send(form)
+
+        }
+
+        $scope.doFileDelete = function(field, id) {
+
+            if(!window.confirm('Are you sure, you want to delete this file?')) return
+
+            var properties = {}
+
+            properties['c3sregistration-' + field.replace('_', '-') + '.' + id] = ''
+
+            $http({
+                    method : 'PUT',
+                    url    : API_URL + 'entity-' + $routeParams.application_id,
+                    params : getSignedData($routeParams.application_id, $routeParams.application_key, properties)
+                })
+                .success(function(data) {
+                    delete $scope.application[field]
+                })
+                .error(function(data) {
+                    cl(data.error)
+                })
         }
 
         $scope.doCancel = function() {
@@ -255,7 +296,7 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                     $location.path('/')
                 })
                 .error(function(data) {
-
+                    cl(data.error)
                 })
         }
     }])
