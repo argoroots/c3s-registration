@@ -1,8 +1,11 @@
+var PAGE_URL       = 'http://c3sregistration.studyitin.ee/'
+var API_URL        = 'https://hitsa.entu.ee/api2/'
+var API_USER       = 621
+var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
+
 function cl(d) {
     console.log(d)
 }
-
-
 
 function getSignedData(user, key, data) {
     if(!user || !key) return
@@ -22,8 +25,6 @@ function getSignedData(user, key, data) {
     return data
 }
 
-
-
 function makeKey() {
     var text = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -35,11 +36,6 @@ function makeKey() {
 }
 
 
-
-var PAGE_URL       = 'http://c3sregistration.studyitin.ee/'
-var API_URL        = 'https://hitsa.entu.ee/api2/'
-var API_USER       = 621
-var API_KEY        = '2jBg6SXqqxd3Z8Qas3fAM47wyDC4W6aJ'
 
 angular.module('s3cApp', ['ngRoute', 'ngResource'])
 

@@ -98,7 +98,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-stylus')
     grunt.loadNpmTasks('grunt-contrib-uglify')
     grunt.loadNpmTasks('grunt-contrib-watch')
-    grunt.loadNpmTasks('grunt-font-awesome-vars')
     grunt.loadNpmTasks('grunt-include-replace')
 
     grunt.registerTask(
