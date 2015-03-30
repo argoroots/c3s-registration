@@ -46,11 +46,11 @@ script(type='text/ng-template', id='addon')
       i The additional rate for an accompanying person's accommodation for 12 - 17 July 2015 is
         b  200 euros.
 
-    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1(ng-if='application.accompanying_person.value')
       label.control-label(for='accompanying_person_name') Name of the accompanying person
       input.form-control.col-sm-6(id='accompanying_person_name', type='text', placeholder='', ng-model='application.accompanying_person_name.value', ng-blur='doSave($event)')
 
-    .form-group.col-xs-12.col-sm-5
+    .form-group.col-xs-12.col-sm-5(ng-if='application.accompanying_person.value')
       label.control-label(for='room_type') Please specify the room type you wish to stay in
       select.form-control(id='room_type', ng-model='application.room_type.value', ng-blur='doSave($event)')
         option(value='') Chose room type...
@@ -122,7 +122,7 @@ script(type='text/ng-template', id='addon')
       i The additional rate for the gala dinner on 16 July 2015 is
         b  70 euros.
 
-    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person_launch.value || application.accompanying_person_dinner.value || application.accompanying_person_reception.value || application.accompanying_person_gala.value')
       label.control-label(for='accompanying_person_dietary') Please inform us, if the accompanying person has any dietary requirements.
       input.form-control(id='accompanying_person_dietary', type='text', placeholder='', ng-model='application.accompanying_person_dietary.value', ng-blur='doSave($event)')
 
@@ -166,7 +166,7 @@ script(type='text/ng-template', id='addon')
         input(id='arriving_transfer_needed', type='checkbox', ng-model='application.arriving_transfer_needed.value', ng-blur='doSave($event)', style='margin-right:15px;')
         | I need transfer from Tallinn to the Summer School hotel on arrival on 12 July 2015
 
-    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1(ng-if='application.arriving_transfer_needed.value')
       label.control-label(for='arriving_by') I will be arriving by
       select.form-control(id='arriving_by', ng-model='application.arriving_by.value', ng-blur='doSave($event)')
         option(value='') Chose...
@@ -174,7 +174,7 @@ script(type='text/ng-template', id='addon')
         option(value='ferry') Ferry
         option(value='bus') Bus
 
-    .form-group.col-xs-12.col-sm-5
+    .form-group.col-xs-12.col-sm-5(ng-if='application.arriving_transfer_needed.value')
       label.control-label(for='time_of_arrival') Time of arrival (date, time)
       input.form-control.col-sm-6(id='time_of_arrival', type='text', placeholder='', ng-model='application.time_of_arrival.value', ng-blur='doSave($event)')
 
@@ -185,7 +185,7 @@ script(type='text/ng-template', id='addon')
         input(id='departing_transfer_needed', type='checkbox', ng-model='application.departing_transfer_needed.value', ng-blur='doSave($event)', style='margin-right:15px;')
         | I need transfer from the Summer School hotel to Tallinn on departure on 17 July 2015
 
-    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1(ng-if='application.departing_transfer_needed.value')
       label.control-label(for='departing_by') I will be departing by
       select.form-control(id='departing_by', ng-model='application.departing_by.value', ng-blur='doSave($event)')
         option(value='') Chose...
@@ -193,7 +193,7 @@ script(type='text/ng-template', id='addon')
         option(value='ferry') Ferry
         option(value='bus') Bus
 
-    .form-group.col-xs-12.col-sm-5
+    .form-group.col-xs-12.col-sm-5(ng-if='application.departing_transfer_needed.value')
       label.control-label(for='time_of_departure') Time of departure (date, time)
       input.form-control.col-sm-6(id='time_of_departure', type='text', placeholder='', ng-model='application.time_of_departure.value', ng-blur='doSave($event)')
 
