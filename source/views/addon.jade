@@ -76,53 +76,53 @@ script(type='text/ng-template', id='addon')
 
     .spacer.col-xs-12
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify If you are travelling with an accompanying person, please inform us, if the accompanying person wishes to join for the same catering as the participants of the Summer School. The accompanying persons have also the opportunity to eat separately at the Summer School
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value') If you are travelling with an accompanying person, please inform us, if the accompanying person wishes to join for the same catering as the participants of the Summer School. The accompanying persons have also the opportunity to eat separately at the Summer School
       a(href='http://www.laulasmaa.ee/en/restaurant-wicca-and-cafe-kohwicca/')  hotel restaurant
       |  with other regular guests or to do some shopping in the local
       a(href='http://www.comarket.ee/eng/info/stores')  grocery store
       |  (550 Meters from the hotel).
 
-    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1(ng-if='application.accompanying_person.value')
       label(for='accompanying_launch')
         input(id='accompanying_launch', type='checkbox', ng-model='application.accompanying_launch.value', ng-click='doSave($event)', style='margin-right:15px;')
         | The accompanying person wishes to join for the lunches
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value')
       i The additional rate for the buffet style lunches (five times three course menus) for 13 – 17 July 2015 is
         b  90 euros.
 
-    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1(ng-if='application.accompanying_person.value')
       label(for='accompanying_dinner')
         input(id='accompanying_dinner', type='checkbox', ng-model='application.accompanying_dinner.value', ng-click='doSave($event)', style='margin-right:15px;')
         | The accompanying person wishes to join for the dinners
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value')
       i The additional rate for the buffet style dinners for 13 – 15 July 2015 (three times three course menus) is
         b  60 euros.
 
-    .spacer.col-xs-12
+    .spacer.col-xs-12(ng-if='application.accompanying_person.value')
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify The standard package for the participant covers the welcoming reception in the Summer School hotel on 12 July 2015 and the gala dinner on 16 July 2015 (the venue will be informed additionally). Please inform us, if the accompanying person wishes to join for the welcoming reception and gala dinner.
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value') The standard package for the participant covers the welcoming reception in the Summer School hotel on 12 July 2015 and the gala dinner on 16 July 2015 (the venue will be informed additionally). Please inform us, if the accompanying person wishes to join for the welcoming reception and gala dinner.
 
-    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1(ng-if='application.accompanying_person.value')
       label(for='accompanying_reception')
         input(id='accompanying_reception', type='checkbox', ng-model='application.accompanying_reception.value', ng-click='doSave($event)', style='margin-right:15px;')
         | The accompanying person wishes to join for the welcoming reception
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value')
       i The additional rate for the welcoming reception on 12 July 2015 is
         b  30 euros.
 
-    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1(ng-if='application.accompanying_person.value')
       label(for='accompanying_gala')
         input(id='accompanying_gala', type='checkbox', ng-model='application.accompanying_gala.value', ng-click='doSave($event)', style='margin-right:15px;')
         | The accompanying person wishes to join for the gala dinner
 
-    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value')
       i The additional rate for the gala dinner on 16 July 2015 is
         b  70 euros.
 
-    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_launch.value || application.accompanying_dinner.value || application.accompanying_reception.value || application.accompanying_gala.value')
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify(ng-if='application.accompanying_person.value && (application.accompanying_launch.value || application.accompanying_dinner.value || application.accompanying_reception.value || application.accompanying_gala.value)')
       label.control-label(for='accompanying_dietary') Please inform us, if the accompanying person has any dietary requirements.
       input.form-control(id='accompanying_dietary', type='text', placeholder='', ng-model='application.accompanying_dietary.value', ng-blur='doSave($event)')
 
