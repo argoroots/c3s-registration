@@ -49,11 +49,11 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 templateUrl: 'start',
                 controller: 'startCtrl'
             })
+            // .when('/:application_id/:application_key', {
+            //     templateUrl: 'application',
+            //     controller: 'applicationCtrl'
+            // })
             .when('/:application_id/:application_key', {
-                templateUrl: 'application',
-                controller: 'applicationCtrl'
-            })
-            .when('/:application_id/:application_key/addon', {
                 templateUrl: 'addon',
                 controller: 'applicationCtrl'
             })
@@ -148,10 +148,18 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
             .success(function(data) {
                 for (key in data.result.properties) {
                     if(data.result.properties[key].values) {
-                        $scope.application[key.replace('-', '_')] = {
-                            id: data.result.properties[key].values[0].id,
-                            old: data.result.properties[key].values[0].value,
-                            value: data.result.properties[key].values[0].value
+                        if(data.result.properties[key].datatype == 'boolean') {
+                            $scope.application[key.replace('-', '_')] = {
+                                id: data.result.properties[key].values[0].id,
+                                old: Boolean(data.result.properties[key].values[0].db_value),
+                                value: Boolean(data.result.properties[key].values[0].db_value)
+                            }
+                        } else {
+                            $scope.application[key.replace('-', '_')] = {
+                                id: data.result.properties[key].values[0].id,
+                                old: data.result.properties[key].values[0].value,
+                                value: data.result.properties[key].values[0].value
+                            }
                         }
                     }
                 }
@@ -184,8 +192,8 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                         if(data.result.properties[property]) {
                             $scope.application[field] = {
                                 id: data.result.properties[property][0].id,
-                                old: data.result.properties[property][0].value,
-                                value: data.result.properties[property][0].value
+                                old: $scope.application[field].value,
+                                value: $scope.application[field].value
                             }
                         } else {
                             $scope.application[field] = {}
