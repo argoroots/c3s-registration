@@ -53,6 +53,10 @@ angular.module('s3cApp', ['ngRoute', 'ngResource'])
                 templateUrl: 'application',
                 controller: 'applicationCtrl'
             })
+            .when('/:application_id/:application_key/addon', {
+                templateUrl: 'addon',
+                controller: 'applicationCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             })

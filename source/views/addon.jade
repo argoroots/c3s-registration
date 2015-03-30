@@ -1,0 +1,214 @@
+script(type='text/ng-template', id='accommodation')
+
+  //- pre.row {{ application | json }}
+
+  .row
+    h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center Application
+
+  .row
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify Welcome to the 2015 Cyber Security Summer School to be held in Estonia 13 - 17 July 2015. For better organisation of the event, we ask you to provide the following additional information. If you have any questions, please e-mail
+      a(href='mailto:info@studyitin.ee')  info@studyitin.ee
+      | .
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      b Please complete this section by 10 April 2015 at the latest.
+
+  form#application.row
+
+
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Accommodation details
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      label.control-label(for='share_room') The standard package for the participant covers accommodation in a standard twin room shared with another Summer School participant for 12 - 17 July 2015. You do not have to do anything if you just want to be randomly allocated with another participant of the same sex. If you have preferences with whom you want to share the room, please write his/her name below
+      input.form-control(id='share_room', type='text', placeholder='', ng-model='application.share_room.value', ng-blur='doSave($event)')
+
+    .spacer.col-xs-12
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify For an extra charge, the following special arrangements are available (please note that the amount is limited and will be allocated on a first come, first serve basis)
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+        label(for='single_room')
+          input(id='single_room', type='checkbox', ng-model='application.single_room.value', ng-blur='doSave($event)', style='margin-right:15px;')
+          | I wish to stay in a single room.
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for a standard single room for 12 - 17 July 2015 is
+        b  150 euros.
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='accompanying_person')
+        input(id='accompanying_person', type='checkbox', ng-model='application.accompanying_person.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | I am travelling with an accompanying person
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for an accompanying person's accommodation for 12 - 17 July 2015 is
+        b  200 euros.
+
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+      label.control-label(for='accompanying_person_name') Name of the accompanying person
+      input.form-control.col-sm-6(id='accompanying_person_name', type='text', placeholder='', ng-model='application.accompanying_person_name.value', ng-blur='doSave($event)')
+
+    .form-group.col-xs-12.col-sm-5
+      label.control-label(for='room_type') Please specify the room type you wish to stay in
+      select.form-control(id='room_type', ng-model='application.room_type.value', ng-blur='doSave($event)')
+        option(value='') Chose room type...
+        option(value='double') Double
+        option(value='twin') Twin
+
+    .spacer.col-xs-12
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      label.control-label(for='booking_info') The standard package includes check-in on 12 July 2015 and check-out on 17 July 2015. Please inform us, if due to your flight schedule or preference you need accommodation for a longer period in the Summer School hotel or you wish assistance from the organisers booking your accommodation in Tallinn.
+      input.form-control(id='booking_info', type='text', placeholder='', ng-model='application.booking_info.value', ng-blur='doSave($event)')
+
+
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Catering details
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      label.control-label(for='dietary_requirements') The standard package for the participants covers breakfasts, lunches and dinners according to the
+        a(href='http://www.studyitin.ee/c3s/program')  programme
+        | . The Summer School hotel offers a special menu for vegetarians, diabetics and people with intolerance to gluten. Please inform us, if you have any dietary requirements.
+      input.form-control(id='dietary_requirements', type='text', placeholder='', ng-model='application.dietary_requirements.value', ng-blur='doSave($event)')
+
+    .spacer.col-xs-12
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify If you are travelling with an accompanying person, please inform us, if the accompanying person wishes to join for the same catering as the participants of the Summer School. The accompanying persons have also the opportunity to eat separately at the Summer School
+      a(href='http://www.laulasmaa.ee/en/restaurant-wicca-and-cafe-kohwicca/')  hotel restaurant
+      |  with other regular guests or to do some shopping in the local
+      a(href='http://www.comarket.ee/eng/info/stores')  grocery store
+      |  (550 Meters from the hotel).
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='accompanying_person_launch')
+        input(id='accompanying_person_launch', type='checkbox', ng-model='application.accompanying_person_launch.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | The accompanying person wishes to join for the lunches
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for the buffet style lunches (five times three course menus) for 13 – 17 July 2015 is
+        b  90 euros.
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='accompanying_person_dinner')
+        input(id='accompanying_person_dinner', type='checkbox', ng-model='application.accompanying_person_dinner.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | The accompanying person wishes to join for the dinners
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for the buffet style dinners for 13 – 15 July 2015 (three times three course menus) is
+        b  60 euros.
+
+    .spacer.col-xs-12
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify The standard package for the participant covers the welcoming reception in the Summer School hotel on 12 July 2015 and the gala dinner on 16 July 2015 (the venue will be informed additionally). Please inform us, if the accompanying person wishes to join for the welcoming reception and gala dinner.
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='accompanying_person_reception')
+        input(id='accompanying_person_reception', type='checkbox', ng-model='application.accompanying_person_reception.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | The accompanying person wishes to join for the welcoming reception
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for the welcoming reception on 12 July 2015 is
+        b  30 euros.
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='accompanying_person_gala')
+        input(id='accompanying_person_gala', type='checkbox', ng-model='application.accompanying_person_gala.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | The accompanying person wishes to join for the gala dinner
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      i The additional rate for the gala dinner on 16 July 2015 is
+        b  70 euros.
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      label.control-label(for='accompanying_person_dietary') Please inform us, if the accompanying person has any dietary requirements.
+      input.form-control(id='accompanying_person_dietary', type='text', placeholder='', ng-model='application.accompanying_person_dietary.value', ng-blur='doSave($event)')
+
+
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Visa details
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify Estonia is the member of the Schengen Area. No visa is required for the citizens of the EU, EEA and many other countries. For further information, please see
+      a(href='http://vm.ee/en/who-does-not-need-visa-visit-estonia')  http://vm.ee/en/who-does-not-need-visa-visit-estonia
+      | . Visitors who need a visa should apply for a standard Schengen visa. We recommend applying as soon as possible. If you need an invitation or other additional documents from the organisers for applying for the visa, please write an e-mail to
+      a(href='mailto:info@studyitin.ee')  info@studyitin.ee
+      | .
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify You need a valid passport to enter Estonia. Passports must have at least six months validity remaining after your intended date of departure from your travel destination.
+
+
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Payment details
+
+    .form-group.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      label.control-label(for='invoice_recipient') The participation fee of the Summer School is
+        b  100 euros
+        | . Payment details for the participation fee and additional charges if chosen will be sent to your e-mail address by
+        b  15 April 2015
+        |  at the latest. The participation fee including the additional charges if chosen must be paid by 15 May 2015 at the latest. If you need an invoice, please provide us the details of the invoice recipient (name, address, country).
+      input.form-control(id='invoice_recipient', type='text', placeholder='', ng-model='application.invoice_recipient.value', ng-blur='doSave($event)')
+
+
+
+
+    h2.col-xs-12.col-sm-10.col-sm-offset-1 Travel details
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify
+      b Please complete this section as soon as you have the information but no later than 1 June 2015.
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify The standard package covers transfers between Tallinn’s major junctions (airport, port, bus terminal, city centre) and the Summer School hotel on arrival on 12 July 2015 and departure on 17 July 2015 around 4:00 PM. The exact schedule will be provided in the beginning of July. For better planning of the transfer, please provide us your travel details to Tallinn.
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='arriving_transfer_needed')
+        input(id='arriving_transfer_needed', type='checkbox', ng-model='application.arriving_transfer_needed.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | I need transfer from Tallinn to the Summer School hotel on arrival on 12 July 2015
+
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+      label.control-label(for='arriving_by') I will be arriving by
+      select.form-control(id='arriving_by', ng-model='application.arriving_by.value', ng-blur='doSave($event)')
+        option(value='') Chose...
+        option(value='plane') Plane
+        option(value='ferry') Ferry
+        option(value='bus') Bus
+
+    .form-group.col-xs-12.col-sm-5
+      label.control-label(for='time_of_arrival') Time of arrival (date, time)
+      input.form-control.col-sm-6(id='time_of_arrival', type='text', placeholder='', ng-model='application.time_of_arrival.value', ng-blur='doSave($event)')
+
+    .spacer.col-xs-12
+
+    .form-groupcheckbox.col-xs-12.col-sm-offset-1
+      label(for='departing_transfer_needed')
+        input(id='departing_transfer_needed', type='checkbox', ng-model='application.departing_transfer_needed.value', ng-blur='doSave($event)', style='margin-right:15px;')
+        | I need transfer from the Summer School hotel to Tallinn on departure on 17 July 2015
+
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
+      label.control-label(for='departing_by') I will be departing by
+      select.form-control(id='departing_by', ng-model='application.departing_by.value', ng-blur='doSave($event)')
+        option(value='') Chose...
+        option(value='plane') Plane
+        option(value='ferry') Ferry
+        option(value='bus') Bus
+
+    .form-group.col-xs-12.col-sm-5
+      label.control-label(for='time_of_departure') Time of departure (date, time)
+      input.form-control.col-sm-6(id='time_of_departure', type='text', placeholder='', ng-model='application.time_of_departure.value', ng-blur='doSave($event)')
+
+
+    .spacer.col-xs-12
+    .spacer.col-xs-12
+
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify If you have questions, please do not hesitate to contact us at
+      a(href='mailto:info@studyitin.ee')  info@studyitin.ee
+      | .
+
+    p.col-xs-12.col-sm-10.col-sm-offset-1.text-justify Please also continue to monitor C3S 2015 website for further details
+      a(href='http://www.studyitin.ee/c3s')  http://www.studyitin.ee/c3s
+      | .
+
+    button.col-xs-4.col-sm-3.col-xs-offset-1.col-sm-offset-8.btn.btn-lg.btn-success(ng-show='!sending', ng-click='fakeSave()') Save application
+    button.col-xs-4.col-sm-3.col-xs-offset-1.col-sm-offset-8.btn.btn-lg.btn-success.disabled(ng-show='sending', ng-click='fakeSave()') Saving ...
