@@ -60,7 +60,7 @@ script(type='text/ng-template', id='application')
       label.control-label(for='university_country') Country
       input.form-control(id='university_country', type='text', ng-model='application.university_country.value', ng-blur='doSave($event)')
 
-    .form-group.col-xs-12.col-sm-7.col-sm-offset-1(ng-if='application.role.value == "researcher"')
+    .form-group.col-xs-12.col-sm-7.col-sm-offset-1(ng-if='application.role.value == "junior-researcher" || application.role.value == "senior-researcher"')
       label.control-label(for='job_title') Job title
       input.form-control(id='job_title', type='text', ng-model='application.job_title.value', ng-blur='doSave($event)')
 
@@ -79,7 +79,7 @@ script(type='text/ng-template', id='application')
 
 
     h2.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role.value == "student"') Dissertation advisor
-    h2.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role.value == "researcher"') Mentor
+    h2.col-xs-12.col-sm-10.col-sm-offset-1(ng-if='application.role.value == "junior-researcher" || application.role.value == "senior-researcher"') Mentor
 
     .form-group.col-xs-12.col-sm-5.col-lg-4.col-sm-offset-1(ng-if='application.role.value')
       label.control-label(for='advisor_name') Name
@@ -103,7 +103,7 @@ script(type='text/ng-template', id='application')
 
     .form-group.col-xs-12.col-sm-5(ng-if='application.role.value')
       label.control-label(for='support_letter', ng-if='application.role.value == "student"') Dissertation advisor's support letter (max 1 page)
-      label.control-label(for='support_letter', ng-if='application.role.value == "researcher"') Mentor's support letter (max 1 page)
+      label.control-label(for='support_letter', ng-if='application.role.value == "junior-researcher" || application.role.value == "senior-researcher"') Mentor's support letter (max 1 page)
       input.form-control(id='support_letter', type='file', onchange='angular.element(this).scope().doFileUpload(this)', ng-show='!application.support_letter')
       .col-xs-12(ng-if='application.support_letter.progress') {{ application.support_letter.progress }}% uploaded. Please wait...
       a.col-xs-12.file(href='', ng-show='application.support_letter', ng-click='doFileDelete("support_letter", application.support_letter.id)', title='Delete file...') {{ application.support_letter.value }}
