@@ -166,7 +166,7 @@ script(type='text/ng-template', id='addon')
         input(id='arriving_transfer', type='checkbox', ng-model='application.arriving_transfer.value', ng-click='doSave($event)', style='margin-right:15px;')
         | I need transfer from Tallinn to the Summer School hotel on arrival on 12 July 2015
 
-    .form-group.col-xs-12.col-sm-5.col-sm-offset-1(ng-if='application.arriving_transfer.value')
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
       label.control-label(for='arriving_by') I will be arriving by
       select.form-control(id='arriving_by', ng-model='application.arriving_by.value', ng-blur='doSave($event)')
         option(value='') Chose...
@@ -174,7 +174,7 @@ script(type='text/ng-template', id='addon')
         option(value='ferry') Ferry
         option(value='bus') Bus
 
-    .form-group.col-xs-12.col-sm-5(ng-if='application.arriving_transfer.value')
+    .form-group.col-xs-12.col-sm-5
       label.control-label(for='arriving_time') Time of arrival (date, time)
       input.form-control.col-sm-6(id='arriving_time', type='text', placeholder='', ng-model='application.arriving_time.value', ng-blur='doSave($event)')
 
@@ -185,7 +185,7 @@ script(type='text/ng-template', id='addon')
         input(id='departing_transfer', type='checkbox', ng-model='application.departing_transfer.value', ng-click='doSave($event)', style='margin-right:15px;')
         | I need transfer from the Summer School hotel to Tallinn on departure on 17 July 2015
 
-    .form-group.col-xs-12.col-sm-5.col-sm-offset-1(ng-if='application.departing_transfer.value')
+    .form-group.col-xs-12.col-sm-5.col-sm-offset-1
       label.control-label(for='departing_by') I will be departing by
       select.form-control(id='departing_by', ng-model='application.departing_by.value', ng-blur='doSave($event)')
         option(value='') Chose...
@@ -193,7 +193,7 @@ script(type='text/ng-template', id='addon')
         option(value='ferry') Ferry
         option(value='bus') Bus
 
-    .form-group.col-xs-12.col-sm-5(ng-if='application.departing_transfer.value')
+    .form-group.col-xs-12.col-sm-5
       label.control-label(for='departing_time') Time of departure (date, time)
       input.form-control.col-sm-6(id='departing_time', type='text', placeholder='', ng-model='application.departing_time.value', ng-blur='doSave($event)')
 
